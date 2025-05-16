@@ -97,39 +97,102 @@ Step14. click on debug and simulate using simulation as shown below
 
 ## STM 32 CUBE PROGRAM :
 
+```
+#include "main.h"
 
+TIM_HandleTypeDef htim2;
+
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_TIM2_Init(void);
+
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  MX_TIM2_Init();
+ 
+  HAL_TIM_Base_Start(&htim2);
+  HAL_TIM_PWM_Init(&htim2);
+  HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
+
+  while (1)
+  {
+   
+ }
+```
 
 
 
 ## Output screen shots of proteus  :
  
- 
+ ![Screenshot 2025-05-16 201950](https://github.com/user-attachments/assets/754efdcb-9a9c-4d43-afd4-a5392da4c139)
+
  ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
- 
+ ![Screenshot 2025-05-16 201959](https://github.com/user-attachments/assets/8bcfd696-abb0-43fe-9ba3-ccf16bb3f474)
+
 
 ## DUTY CYCLE AND FREQUENCY CALCULATION 
 FOR PULSE AT 500
+![Screenshot 2025-05-16 202041](https://github.com/user-attachments/assets/540edd0f-cd0e-4b8e-b7e4-054c4b77713c)
 
-TON = 
-TOFF=
-TOTAL TIME = 
+```
+TON = 1.5*20*10^-6
+    = 30*10^-6 s
+TOFF = 1.5*20*10^-6
+     = 30*10^-6 s
+TOTAL TIME = TON + TOFF 
+           = 60*10^-6 s
 FREQUENCY = 1/(TOTAL TIME)
-
+          = 1/(60*10^-6)
+          = 0.016*10^6 s
+DUTY CYCLE = TON/(TON+TOFF)
+           = 30*10^-6/(60*10^-6)
+           = 0.5
+    IN % = 0.5 * 100
+         = 50 %
+```
 FOR PULSE AT 700
+![Screenshot 2025-05-16 202129](https://github.com/user-attachments/assets/297544ca-69c5-40e8-b396-e8b9b31a537a)
 
-TON = 
-TOFF=
-TOTAL TIME = 
+```
+TON = 2.25*20*10^-6
+    = 45*10^-6 s
+TOFF = 0.75*20*10^-6
+     = 15*10^-6 s
+TOTAL TIME = TON + TOFF
+           = 60*10^-6 s
 FREQUENCY = 1/(TOTAL TIME)
+          = 1/(60*10^-6)
+          = 0.016*10^6 s
+DUTY CYCLE = TON/(TON+TOFF)
+           = 45*10^-6/(60*10^-6)
+           = 0.75
+    IN % = 0.75*100
+         = 75 %
 
+```
 
 FOR PULSE AT 900
+![Screenshot 2025-05-16 202206](https://github.com/user-attachments/assets/548f2a8a-0ed5-4ee9-8510-5cfddc281189)
 
-TON = 
-TOFF=
-TOTAL TIME = 
+```
+TON = 0.75*20*10^-6
+    = 15*10^-6 s
+TOFF = 2.25*20*10^-6
+     = 45*10^-6 s
+TOTAL TIME = TON + TOFF
+           = 60*10^-6 s
 FREQUENCY = 1/(TOTAL TIME)
-
+          = 1/(60*10^-6)
+          = 0.016*10^6 s
+DUTY CYCLE = TON/(TON+TOFF)
+           = 15*10^-6/(60*10^-6)
+           = 0.25
+    IN % = 0.25*100
+         = 25 %
+```
 
 ## Result :
 A PWM Signal is generated using the following frequency and various duty cycles are simulated 
